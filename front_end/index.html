@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Secure Bank</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- The Hidden Sentinel SDK Overlay -->
+    <div class="overlay" id="fraudOverlay">
+        <div class="alert-box">
+            <h1>⚠️ TRANSACTION BLOCKED</h1>
+            <p>Sentinel SDK intercepted a suspicious transaction.</p>
+            <p id="fraudReason" style="color: #ffcccc; margin-top: 10px;"></p>
+            <button onclick="dismissAlert()">Acknowledge</button>
+        </div>
+    </div>
+
+    <!-- The Mock Bank Dashboard -->
+    <nav class="navbar">
+        <h2>Bharat Secure Bank</h2>
+        <span>Welcome, Rajesh</span>
+    </nav>
+
+    <main class="dashboard">
+        <div class="card">
+            <h3>Available Balance</h3>
+            <h1>₹5,50,000.00</h1>
+        </div>
+
+        <div class="card">
+            <h2>Transfer Funds</h2>
+            <form id="transferForm">
+                <input type="text" id="recipient" placeholder="Payee UPI ID (e.g., scammer@upi)" required>
+                <input type="number" id="amount" placeholder="Amount in ₹" required>
+                <input type="text" id="memo" placeholder="Remarks (e.g., KYC Update)">
+                <button type="submit">Send Money</button>
+            </form>
+            <p id="statusMessage"></p>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
