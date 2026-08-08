@@ -37,10 +37,11 @@ class AccountAction(BaseModel):
 
 class AuditLogCreate(BaseModel):
     account_id: str
-    transaction_id: str
+    transaction_id: Optional[str] = None
     transcript: str
     identified_vector: str
-    voice_stress_score: float
+    voice_stress_score: Optional[float] = None
+    status: str
 
 class TransactionResponse(BaseModel):
     message: str

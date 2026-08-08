@@ -4,43 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bharat Secure Bank</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Use Inter font for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
     <!-- The Hidden Sentinel SDK Overlay -->
     <div class="overlay" id="fraudOverlay">
         <div class="alert-box">
-            <h1>⚠️ TRANSACTION BLOCKED</h1>
-            <p>Sentinel SDK intercepted a suspicious transaction.</p>
-            <p id="fraudReason" style="color: #ffcccc; margin-top: 10px;"></p>
-            <button onclick="dismissAlert()">Acknowledge</button>
+            <div class="alert-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <h1>TRANSACTION BLOCKED</h1>
+            <p>Sentinel SDK intercepted a highly suspicious transaction.</p>
+            <div class="fraud-reason-container">
+                <p id="fraudReason"></p>
+            </div>
+            
+            <!-- AI Voice Call Visualization -->
+            <div class="ai-status-container" id="aiStatusContainer">
+                <div class="ai-avatar">
+                    <div class="ai-wave"></div>
+                    <div class="ai-wave"></div>
+                    <!-- Microphone/AI Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="22"></line>
+                    </svg>
+                </div>
+                <p class="ai-text" id="aiStatusText">Initiating AI Security Call...</p>
+            </div>
+
+            <button onclick="dismissAlert()">Acknowledge & Secure Account</button>
+            <button id="acceptCallBtn" class="btn-accept" style="background-color: #ef4444; margin-top: 10px;">Hold to Talk to AI</button>
         </div>
+    </div>
+
+    <div class="ambient-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
     <!-- The Mock Bank Dashboard -->
     <nav class="navbar">
-        <h2>Bharat Secure Bank</h2>
-        <span>Welcome, Rajesh</span>
+        <div class="nav-brand">
+            <div class="logo"></div>
+            <h2>Bharat Secure Bank</h2>
+        </div>
+        <div class="nav-profile">
+            <span>Welcome, Rajesh</span>
+            <img src="assets/avatar.png" alt="Profile Avatar" class="avatar">
+        </div>
     </nav>
 
     <main class="dashboard">
-        <div class="card">
-            <h3>Available Balance</h3>
-            <h1>₹5,50,000.00</h1>
-        </div>
+        <div class="grid-container">
+            <!-- Balance Card -->
+            <div class="card balance-card glass-panel">
+                <div class="card-header">
+                    <h3>Available Balance</h3>
+                    <span class="status-badge">Active</span>
+                </div>
+                <h1 class="balance-amount">₹5,50,000<span class="decimals">.00</span></h1>
+                <div class="account-details">
+                    <p>Account: <span>**** 1001</span></p>
+                    <p>Last login: <span>Today, 10:42 AM</span></p>
+                </div>
+            </div>
 
-        <div class="card">
-            <h2>Transfer Funds</h2>
-            <form id="transferForm">
-                <input type="text" id="recipient" placeholder="Payee UPI ID (e.g., scammer@upi)" required>
-                <input type="number" id="amount" placeholder="Amount in ₹" required>
-                <input type="text" id="memo" placeholder="Remarks (e.g., KYC Update)">
-                <button type="submit">Send Money</button>
-            </form>
-            <p id="statusMessage"></p>
+            <!-- Transfer Card -->
+            <div class="card transfer-card glass-panel">
+                <h2>Transfer Funds</h2>
+                <form id="transferForm">
+                    <div class="input-group">
+                        <label for="recipient">Payee UPI ID</label>
+                        <input type="text" id="recipient" placeholder="e.g., recipient@upi" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" id="amount" placeholder="0.00" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="memo">Remarks</label>
+                        <input type="text" id="memo" placeholder="e.g., Rent Payment">
+                    </div>
+
+                    <div class="toggle-group">
+                        <label class="switch">
+                            <input type="checkbox" id="isTor">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="toggle-label">Simulate Tor Network (Instant Block)</span>
+                    </div>
+
+                    <button type="submit" class="primary-btn">
+                        <span>Send Securely</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+                <div class="status-container">
+                    <p id="statusMessage"></p>
+                </div>
+            </div>
         </div>
     </main>
 
-    <script src="app.js"></script>
+    <!-- Global Voice Assistant FAB -->
+    <button id="voiceChatFab" class="voice-fab glass-panel">
+        <svg id="micIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+        </svg>
+        <span class="fab-text">Hold to Ask AI</span>
+    </button>
+
+    <script type="module" src="app.js?v=6"></script>
 </body>
 </html>

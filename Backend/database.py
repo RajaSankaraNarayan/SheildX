@@ -110,7 +110,7 @@ def create_transaction(account_id: str, amount: float, recipient: str, device_ip
     conn.close()
     return tx_id
 
-def create_audit_log(account_id: str, transaction_id: str, transcript: str, identified_vector: str, voice_stress_score: float):
+def create_audit_log(account_id: str, transcript: str, identified_vector: str, transaction_id: str = None, voice_stress_score: float = None):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     log_id = str(uuid.uuid4())
